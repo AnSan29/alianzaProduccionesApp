@@ -6,7 +6,7 @@ export interface UserAttributes {
   name: string;
   email: string;
   password_hash: string;
-  role: string;
+  role: "user" | "admin";
   is_active: boolean;
   created_at?: Date;
   updated_at?: Date;
@@ -25,7 +25,7 @@ export class User
   public name!: string;
   public email!: string;
   public password_hash!: string;
-  public role!: string;
+  public role!: "user" | "admin";
   public is_active!: boolean;
   public readonly created_at!: Date;
   public readonly updated_at!: Date;

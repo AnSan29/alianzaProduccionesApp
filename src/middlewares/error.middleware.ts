@@ -1,6 +1,7 @@
 // src/middlewares/error.middleware.ts
 import { ZodError } from "zod";
 import { Request, Response, NextFunction } from "express";
+import { logger } from "../utils/logger";
 
 export function errorMiddleware(
   err: any,
@@ -23,9 +24,7 @@ export function errorMiddleware(
   const code = (err && err.message && map[err.message]) || 500;
   const name = (err && err.message) || "INTERNAL_ERROR";
 
-  if (code === 500) {
-    console.error(err);
-  }
+  if (code === 500) logger.error({ err, path: _req.path }, "Unhandled error");
 
   res.status(code).json({ error: name });
 }
